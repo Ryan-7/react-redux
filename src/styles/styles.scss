@@ -1,0 +1,6 @@
+@import './base/settings'; // import defined variables first obviously 
+@import './base/base';
+
+
+// Header is a partial because we are not loading it in directly
+// We are loading it into this stylesheet, which is ultimately loaded
