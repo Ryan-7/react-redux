@@ -17,6 +17,7 @@ let state;
 
 store.subscribe(() => {
     state = store.getState();
+    console.log(store.getState())
 })
 
 store.dispatch({ type: 'test', name: 'kyle'})
@@ -28,7 +29,7 @@ store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
 store.dispatch(addExpense({ description: 'Gas Bill', createdAt: 1000 }));
 
 
-store.dispatch(setTextFilter(''));
+
 
 
 

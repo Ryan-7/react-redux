@@ -7,14 +7,18 @@ const now = moment();
 console.log(now.format('MMM Do, YYYY'));
 
 export default class ExpenseForm extends React.Component {
-
-    state = {
-        description: '',
-        note: '',
-        amount: '',
-        createdAt: moment(),         // the date/time when the page is loaded
-        calendarFocused: false,
-        error: ''
+    constructor(props) {
+        super(props);
+        console.log("the props the form received in this instance:")
+        console.log(props)
+        this.state = {
+            description: props.expense ? props.expense.description : '',
+            note: props.expense ? props.expense.note : '',
+            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),         // the date/time when the page is loaded
+            calendarFocused: false,
+            error: ''
+        }
     }
 
     onDescriptionChange = (e) => {
@@ -76,6 +80,11 @@ export default class ExpenseForm extends React.Component {
         }
     }
 
+    // onRemoveExpense = () => {
+    //   //  this.props.removeExpense();
+    //   console.log('works')
+    // }
+
     render() {
         return (
             <div>
@@ -112,6 +121,7 @@ export default class ExpenseForm extends React.Component {
                     <button>Add Expense</button>
                 </form>
                 {this.state.error && <p>{this.state.error}</p>}
+                <button hidden={!this.props.expense} onClick={this.props.removeExpense}>Remove</button>
             </div>
         )
     }
