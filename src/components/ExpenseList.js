@@ -4,13 +4,18 @@ import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
 
 
-const ExpenseList = (props) => (
+export const ExpenseList = (props) => ( // We are exporting this for testing purposes only. With testing, we don't want to test the connected component
     <div>
-        <h1>Expense List</h1>
-        {props.expenses.map((item) => {
-           // return <ExpenseListItem description={item.description} amount={item.amount} createdAt={item.createdAt}/>
-           return <ExpenseListItem key={item.id} {...item} />
-        })}
+        {
+            props.expenses.length === 0 ? (
+                <p>No Expenses</p>
+            ) : (
+                props.expenses.map((item) => {
+                    // return <ExpenseListItem description={item.description} amount={item.amount} createdAt={item.createdAt}/>
+                    return <ExpenseListItem key={item.id} {...item} />
+                 })
+            )
+        }
     </div>
 );
 
