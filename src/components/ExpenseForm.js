@@ -80,11 +80,6 @@ export default class ExpenseForm extends React.Component {
         }
     }
 
-    // onRemoveExpense = () => {
-    //   //  this.props.removeExpense();
-    //   console.log('works')
-    // }
-
     render() {
         return (
             <div>
@@ -120,8 +115,6 @@ export default class ExpenseForm extends React.Component {
                     </textarea>
                     <button>Add Expense</button>
                 </form>
-                {this.state.error && <p>{this.state.error}</p>}
-                <button hidden={!this.props.expense} onClick={this.props.removeExpense}>Remove</button>
             </div>
         )
     }

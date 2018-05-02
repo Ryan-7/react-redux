@@ -103,11 +103,6 @@ exports[`should render ExpenseForm correctly 1`] = `
       Add Expense
     </button>
   </form>
-  <button
-    hidden={true}
-  >
-    Remove
-  </button>
 </div>
 `;
 
@@ -214,11 +209,6 @@ exports[`should render ExpenseForm correctly with expense data 1`] = `
       Add Expense
     </button>
   </form>
-  <button
-    hidden={false}
-  >
-    Remove
-  </button>
 </div>
 `;
 
@@ -325,13 +315,5 @@ exports[`should render error for invalid form submission 1`] = `
       Add Expense
     </button>
   </form>
-  <p>
-    Please provide description and amount
-  </p>
-  <button
-    hidden={true}
-  >
-    Remove
-  </button>
 </div>
 `;
