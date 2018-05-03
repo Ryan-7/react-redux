@@ -1,36 +1,67 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 // Need an entry point and an output for the final bundle file
-
-
 const path = require('path'); // Require the Node module 'path' so we can use it to join our paths for the output path. 
 
 console.log(__dirname); // This variable is the path to the current location, in this case, the indecision-app project folder. 
 console.log(path.join(__dirname, 'public'))
 
-// Expose something to another file (like a function), it's a node thing. 
-module.exports = {
-    entry: './src/app.js',
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
-    },
-    module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/,
-            exclude: /node_modules/
+// module.exports will expose something to another file (like a function), it's a node thing. 
+
+// We set the env variable in package.json. Pass in the variable here and use it. 
+// When we run yarn build:prod (webpack), we will set the env variable ourselves. 
+// We can now use a smaller source map and make our app much smaller
+
+module.exports = (env) => {
+
+    const isProduction = env === 'production'; // true or false 
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+
+    return {
+        entry: './src/app.js',
+        output: {
+            path: path.join(__dirname, 'public'),
+            filename: 'bundle.js'
         },
-        {   use: ['style-loader', 'css-loader', 'sass-loader'],
-            test: /\.s?css$/
-        }]
-    },
-
-    devtool: 'cheap-module-eval-source-map',
-    devServer: {
-        contentBase: path.join(__dirname, 'public'),
-        historyApiFallback: true
+        module: {
+            rules: [{
+                loader: 'babel-loader',
+                test: /\.js$/,
+                exclude: /node_modules/
+            },
+            {   test: /\.s?css$/,
+                use: CSSExtract.extract({ 
+                    use: [
+                        { 
+                            loader: 'css-loader', 
+                            options: {
+                                sourceMap: true
+                            }
+                        }, 
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
+                
+            }]
+        },
+        plugins: [
+            CSSExtract
+        ],
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        devServer: {
+            contentBase: path.join(__dirname, 'public'),
+            historyApiFallback: true
+        }
+    
     }
+}
 
-};
 
 // ^^ loader lets you customize a file when it's load, so in this case let's run it through babel 
 // devtool allows us to track down errors more easily 
