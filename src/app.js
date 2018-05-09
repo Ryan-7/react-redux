@@ -41,9 +41,10 @@ console.log(store.getState());
 
 console.log(visibleExpenses);
 
+
 const jsx = (
     <Provider store={store}>
-        <AppRouter/>
+        <AppRouter/>     
     </Provider>
 )
 
