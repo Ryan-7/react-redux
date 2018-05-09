@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; // allows us to connect to the store
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses';
+import moment from 'moment';
 
 
 export const ExpenseList = (props) => ( // We are exporting this for testing purposes only. With testing, we don't want to test the connected component
