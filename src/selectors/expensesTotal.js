@@ -1,5 +1,7 @@
-import getVisibleExpenses from './expenses';
+const expensesTotal = (expenses) => {
+    const amountSum = expenses.reduce((a, b) => +a + +b.amount, 0);
+    return amountSum;
 
-const getExpensesTotal = () => {
-    
 }
+
+export default expensesTotal;
