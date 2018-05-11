@@ -41,6 +41,7 @@ app.get('/middleware', sayHi, moreMiddleWare, (req, res) => {
     console.log(req.message2)
 })
 
+// can pass in multiple functions for middleware, just makes sure to call next
 
 app.get('/test', (req, res, next) => {
     console.log(req.body)
